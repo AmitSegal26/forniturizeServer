@@ -1,0 +1,26 @@
+[
+  {
+    "title": "chair 1st",
+    "description": "a very cool",
+    "sizesAvailable": ["40*30", "30*30", "100*50"],
+    "colorsAvailable": ["red", "yellow", "brownish green"],
+    "stockLeft": 42,
+    "price": 100
+  },
+  {
+    "title": "table 1st",
+    "description": "a very cool table",
+    "sizesAvailable": ["40*30", "30*30", "100*50"],
+    "colorsAvailable": ["blue", "red", "brown"],
+    "stockLeft": 50,
+    "price": 120
+  },
+  {
+    "title": "couch 1st",
+    "description": "a very cool couch",
+    "sizesAvailable": ["40*30", "30*30", "100*50"],
+    "colorsAvailable": ["navy", "pink", "brownish green"],
+    "stockLeft": 30,
+    "price": 80
+  }
+]

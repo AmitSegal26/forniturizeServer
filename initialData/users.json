@@ -1,0 +1,30 @@
+[
+  {
+    "name": {
+      "first": "amit",
+      "last": "segal"
+    },
+    "gender": "male",
+    "email": "amit@gmail.com",
+    "password": "Aa123456!",
+    "isAdmin": true
+  },
+  {
+    "name": {
+      "first": "michael",
+      "last": "casher"
+    },
+    "gender": "other",
+    "email": "michael@gmail.com",
+    "password": "Aa123456!"
+  },
+  {
+    "name": {
+      "first": "avior",
+      "last": "mc"
+    },
+    "gender": "male",
+    "email": "avior@gmail.com",
+    "password": "Aa123456!"
+  }
+]
