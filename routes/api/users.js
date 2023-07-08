@@ -11,12 +11,12 @@ const authmw = require("../../middleware/authMiddleware");
 const failedLoginStoreService = require("../../model/mongodb/failedLoginStore/FailedLoginStoreService");
 const failedLoginHelper = require("../../model/failedLoginStoreService/helpers/failedLoginStoreNormalizations");
 //http://localhost:8181/api/users/users
-//admin
+//admin only
 //get an array of all users
 router.get(
   "/users",
   authmw,
-  permissionsMiddleware(false, true, false),
+  permissionsMiddleware(true, false),
   async (req, res) => {
     try {
       const usersArr = await usersServiceModel.getAllUsers();
@@ -26,13 +26,13 @@ router.get(
     }
   }
 );
-//http://localhost:8181/api/users/users/:id
-//token for themselves or admin for all users
+//http://localhost:8181/api/users/user/:id
+//token for themselves or admin for any user
 //get information about the user
 router.get(
-  "/users/:id",
+  "/user/:id",
   authmw,
-  permissionsMiddleware(false, true, false, true),
+  permissionsMiddleware(true, true),
   async (req, res) => {
     try {
       let user = await usersServiceModel.getUserById(req.params.id);
@@ -45,7 +45,7 @@ router.get(
     }
   }
 );
-//http://localhost:8181/api/users/users
+//http://localhost:8181/api/users/register
 //all
 //register
 router.post("/register", async (req, res) => {
@@ -113,13 +113,13 @@ router.post("/login", async (req, res) => {
     res.status(400).json(err);
   }
 });
-//http://localhost:8181/api/users/users/:id
-//token
+//http://localhost:8181/api/users/edit/:id
+//token for themselves only
 //edit user
 router.put(
-  "/users/:id",
+  "/edit/:id",
   authmw,
-  permissionsMiddleware(false, false, false, true),
+  permissionsMiddleware(false, true),
   async (req, res) => {
     try {
       let newData = req.body;
@@ -134,13 +134,13 @@ router.put(
     }
   }
 );
-//http://localhost:8181/api/users/users/:id
+//http://localhost:8181/api/users/user/:id
 //token
-//invert isBusiness value (true/false)
+//invert isAdmin value (true/false)
 router.patch(
-  "/users/:id",
+  "/user/:id",
   authmw,
-  permissionsMiddleware(false, false, false, true),
+  permissionsMiddleware(true, false),
   async (req, res) => {
     try {
       let user = await usersServiceModel.changeAdminStatusOfUser(req.params.id);
@@ -150,12 +150,12 @@ router.patch(
     }
   }
 );
-//http://localhost:8181/api/users/users/:id
+//http://localhost:8181/api/users/delete/:id
 //token for themselves or admin for all users
 router.delete(
-  "/users/:id",
+  "/delete/:id",
   authmw,
-  permissionsMiddleware(false, true, false, true),
+  permissionsMiddleware(true, true),
   async (req, res) => {
     try {
       let user = await usersServiceModel.deleteOneUser(req.params.id);

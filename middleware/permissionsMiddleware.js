@@ -1,24 +1,5 @@
 const CustomError = require("../utils/CustomError");
-const { getCardById } = require("../model/cardsService/cardsService");
 const validateID = require("../validation/idValidationService");
-
-const checkIfBizOwner = async (iduser, idcard, res, next) => {
-  try {
-    await validateID.IDValidation(iduser);
-    await validateID.IDValidation(idcard);
-    const cardData = await getCardById(idcard);
-    if (!cardData) {
-      return res.status(400).json({ msg: "card not found" });
-    }
-    if (cardData.user_id == iduser) {
-      next();
-    } else {
-      res.status(401).json({ msg: "you not the biz owner" });
-    }
-  } catch (err) {
-    res.status(400).json(err);
-  }
-};
 
 const checkOwnIdIfAdminIsOptionalForUsingSelfID = async (
   idUser,
@@ -39,15 +20,12 @@ const checkOwnIdIfAdminIsOptionalForUsingSelfID = async (
 };
 
 /*
-  isBiz = every biz
   isAdmin = is admin
-  isBizOwner = biz owner
   isAdminOptionalForUsingOwnId = indicator of enabling registered user for 
                                  themselves or admin for everyone
 */
 const permissionsMiddleware = (
   isAdmin,
-  isBizOwner,
   isAdminOptionalForUsingOwnId = false
 ) => {
   return async (req, res, next) => {
@@ -66,11 +44,7 @@ const permissionsMiddleware = (
           next
         );
       }
-      if (isBizOwner === true) {
-        return checkIfBizOwner(req.userData._id, req.params.id, res, next);
-      } else {
-        res.status(403).json({ msg: "permissions needed" });
-      }
+      res.status(403).json({ msg: "permissions needed" });
     } catch (err) {
       res.status(400).json(err);
     }

@@ -1,4 +1,5 @@
 const Card = require("./Card");
+const normalizeCardService = require("../../cardsService/helpers/normalizationCardService");
 
 const createCard = (cardToSave) => {
   let card = new Card(cardToSave);
@@ -12,10 +13,15 @@ const getAllCards = () => {
 const getCardById = (id) => {
   return Card.findById(id);
 };
+
 const updateCard = (id, cardToUpdate) => {
-  return Card.findByIdAndUpdate(id, cardToUpdate, {
-    new: true,
-  });
+  return Card.findByIdAndUpdate(
+    id,
+    normalizeCardService(cardToUpdate, cardToUpdate.user_id + ""),
+    {
+      new: true,
+    }
+  );
 };
 
 const getCardsByUserId = (userId) => {

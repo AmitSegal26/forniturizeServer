@@ -7,10 +7,10 @@ const authmw = require("../../middleware/authMiddleware");
 const { IDValidation } = require("../../validation/idValidationService");
 const normalizeCardService = require("../../model/cardsService/helpers/normalizationCardService");
 
-//get all cards
-//http://localhost:8181/api/cards/cards
+//http://localhost:8181/api/cards/allCards
 // all
-router.get("/cards", async (req, res) => {
+//get all cards
+router.get("/allCards", async (req, res) => {
   try {
     const allCards = await cardsServiceModel.getAllCards();
     if (!allCards) {
@@ -22,28 +22,10 @@ router.get("/cards", async (req, res) => {
   }
 });
 
-//get all cards of the owning user
-//http://localhost:8181/api/cards/my-cards
+//http://localhost:8181/api/cards/card/:id
 // all
-router.get("/my-cards", authmw, async (req, res) => {
-  try {
-    const usersCards = await cardsServiceModel.getCardsByUserId(
-      req.userData._id
-    );
-    if (!usersCards.length) {
-      res.json({ msg: "no cards by provided token" });
-    } else {
-      res.json(usersCards);
-    }
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
 //get specific card
-//http://localhost:8181/api/cards/cards/:id
-// all
-router.get("/cards/:id", async (req, res) => {
+router.get("/card/:id", async (req, res) => {
   try {
     await IDValidation(req.params.id);
     const cardFromDB = await cardsServiceModel.getCardById(req.params.id);
@@ -56,13 +38,13 @@ router.get("/cards/:id", async (req, res) => {
   }
 });
 
+//http://localhost:8181/api/cards/create
+//admin only
 //create a new card
-//http://localhost:8181/api/cards/cards
-// biz only
 router.post(
-  "/cards",
+  "/create",
   authmw,
-  permissionsMiddleware(true, false, false),
+  permissionsMiddleware(true, false),
   async (req, res) => {
     try {
       await cardsValidationService.cardValidation(req.body);
@@ -75,13 +57,13 @@ router.post(
   }
 );
 
+//http://localhost:8181/api/cards/edit/:id
+//admin only
 //edit a card
-//http://localhost:8181/api/cards/cards/:id
-// admin or biz owner
 router.put(
-  "/cards/:id",
+  "/edit/:id",
   authmw,
-  permissionsMiddleware(false, false, true),
+  permissionsMiddleware(true, false),
   async (req, res) => {
     try {
       await cardsValidationService.cardValidation(req.body);
@@ -97,23 +79,23 @@ router.put(
   }
 );
 
-//like\remove like a card
-//http://localhost:8181/api/cards/cards/:id
+//http://localhost:8181/api/cards/cart/:id
 //authed
-router.patch("/cards/:id", authmw, async (req, res) => {
+//add/remove card to/from cart
+router.patch("/cart/:id", authmw, async (req, res) => {
   try {
     let cardId = req.params.id;
     await IDValidation(cardId);
     let currCard = await cardsServiceModel.getCardById(cardId);
     if (!currCard) {
-      return res.json({ msg: "no card found to like" });
+      return res.json({ msg: "no card found to add" });
     }
-    if (currCard.likes.find((userId) => userId == req.userData._id)) {
-      currCard.likes = currCard.likes.filter(
+    if (currCard.cart.find((userId) => userId == req.userData._id)) {
+      currCard.cart = currCard.cart.filter(
         (userId) => userId != req.userData._id
       );
     } else {
-      currCard.likes = [...currCard.likes, req.userData._id];
+      currCard.cart = [...currCard.cart, req.userData._id];
     }
     res.status(200).json(await cardsServiceModel.updateCard(cardId, currCard));
   } catch (err) {
@@ -121,10 +103,10 @@ router.patch("/cards/:id", authmw, async (req, res) => {
   }
 });
 
-//http://localhost:8181/api/cards/get-card-likes
+//http://localhost:8181/api/cards/getCart
 //authed
-//get liked cards of user
-router.get("/get-card-likes", authmw, async (req, res) => {
+//get all cards from cart of user
+router.get("/getCart", authmw, async (req, res) => {
   try {
     let userCardsArr = [];
     let {
@@ -135,8 +117,8 @@ router.get("/get-card-likes", authmw, async (req, res) => {
       return;
     }
     for (const card of cardsArr) {
-      let { likes } = card;
-      for (const user of likes) {
+      let { cart } = card;
+      for (const user of cart) {
         if (user == _id) {
           userCardsArr.push(card);
           break;
@@ -149,11 +131,13 @@ router.get("/get-card-likes", authmw, async (req, res) => {
   }
 });
 
-// admin or biz owner
+//http://localhost:8181/api/cards/delete/:id
+//admin only
+//delete card from DB
 router.delete(
-  "/cards/:id",
+  "/delete/:id",
   authmw,
-  permissionsMiddleware(false, true, true),
+  permissionsMiddleware(true, false),
   async (req, res) => {
     try {
       let card = await cardsServiceModel.deleteCard(req.params.id);
