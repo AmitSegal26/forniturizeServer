@@ -4,7 +4,7 @@ const {
   Image,
   DEFAULT_STRING_SCHEMA_REQUIRED,
 } = require("../helpersForCardsAndUsers");
-
+mongoose;
 const cardSchema = new mongoose.Schema({
   title: DEFAULT_STRING_SCHEMA_REQUIRED,
   price: { type: Number, minLength: 1, required: true },
