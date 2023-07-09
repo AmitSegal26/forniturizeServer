@@ -20,19 +20,6 @@ const DEFAULT_STRING_SCHEMA_REQUIRED = {
   minLength: 2,
   required: true,
 };
-const Email = {
-  type: String,
-  require: true,
-  match: RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/),
-  lowercase: true,
-  trim: true,
-  unique: true,
-};
-const Phone = {
-  type: String,
-  required: true,
-  match: RegExp(/0[0-9]{1,2}\-?\s?[0-9]{3}\s?[0-9]{4}/),
-};
 const Created_At = {
   type: Date,
   default: Date.now,
@@ -49,8 +36,6 @@ const Image = new mongoose.Schema({
 });
 
 module.exports = {
-  Email,
-  Phone,
   Created_At,
   URL,
   Image,
