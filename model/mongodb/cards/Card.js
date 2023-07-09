@@ -7,7 +7,6 @@ const {
 
 const cardSchema = new mongoose.Schema({
   title: DEFAULT_STRING_SCHEMA_REQUIRED,
-  price: { type: Number, minLength: 1, required: true },
   description: { ...DEFAULT_STRING_SCHEMA_REQUIRED, maxLength: 1024 },
   image: Image,
   rating: {
@@ -15,10 +14,21 @@ const cardSchema = new mongoose.Schema({
     ratingUsers: [String],
     ratingTotalScore: { type: Number },
   },
-  sizesAvailable: [String],
-  colorsAvailable: [String],
   cart: [String],
-  stockLeft: { type: Number },
+  stock: [
+    [
+      {
+        size: {
+          height: { type: Number },
+          width: { type: Number },
+          length: { type: Number },
+          price: { type: Number },
+        },
+        color: { type: String },
+        stock: { type: Number },
+      },
+    ],
+  ],
   createdAt: Created_At,
   user_id: {
     type: mongoose.Schema.Types.ObjectId,

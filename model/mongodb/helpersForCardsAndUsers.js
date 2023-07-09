@@ -1,14 +1,6 @@
 const mongoose = require("mongoose");
 const { UploadSchema } = require("./Upload");
 
-const URL = {
-  type: String,
-  match: RegExp(
-    /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/
-  ),
-  trim: true,
-};
-
 const DEFAULT_STRING_SCHEMA = {
   type: String,
   maxLength: 256,
@@ -28,11 +20,6 @@ const Email = {
   trim: true,
   unique: true,
 };
-const Phone = {
-  type: String,
-  required: true,
-  match: RegExp(/0[0-9]{1,2}\-?\s?[0-9]{3}\s?[0-9]{4}/),
-};
 const Created_At = {
   type: Date,
   default: Date.now,
@@ -50,9 +37,7 @@ const Image = new mongoose.Schema({
 
 module.exports = {
   Email,
-  Phone,
   Created_At,
-  URL,
   Image,
   Name,
   DEFAULT_STRING_SCHEMA_REQUIRED,

@@ -10,6 +10,7 @@ const permissionsMiddleware = require("../../middleware/permissionsMiddleware");
 const authmw = require("../../middleware/authMiddleware");
 const failedLoginStoreService = require("../../model/mongodb/failedLoginStore/FailedLoginStoreService");
 const failedLoginHelper = require("../../model/failedLoginStoreService/helpers/failedLoginStoreNormalizations");
+const handleEmailExistsErrorFromMongoose = require("../../utils/emailExists");
 //http://localhost:8181/api/users/users
 //admin only
 //get an array of all users
@@ -83,7 +84,7 @@ let twoDArray=[[,,,,],[,,,,,],[,,,,,],[,,,,,]]
     delete newUser.password;
     res.json(newUser);
   } catch (err) {
-    res.status(400).json(err);
+    res.status(400).json(handleEmailExistsErrorFromMongoose(err));
   }
 });
 //http://localhost:8181/api/users/login
@@ -149,7 +150,7 @@ router.put(
       );
       res.status(200).json(newUpdatedUser);
     } catch (err) {
-      res.status(400).json(err);
+      res.status(400).json(handleEmailExistsErrorFromMongoose(err));
     }
   }
 );

@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const {
-  Email,
   Created_At,
   Image,
   Name,
+  Email,
 } = require("../helpersForCardsAndUsers");
 
 const schema = new mongoose.Schema({

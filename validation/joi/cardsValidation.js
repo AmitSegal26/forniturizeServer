@@ -3,10 +3,20 @@ const Joi = require("joi");
 const createCardSchema = Joi.object({
   title: Joi.string().min(2).max(256).required(),
   description: Joi.string().min(2).max(1024).required(),
-  size: Joi.array().items(Joi.string()).min(1).required(),
-  color: Joi.array().items(Joi.string()).min(1).required(),
-  price: Joi.number().min(0).required(),
-  stockLeft: Joi.number().min(1).required(),
+  stock: Joi.array().items(
+    Joi.array().items(
+      Joi.object({
+        size: Joi.object({
+          height: Joi.number(),
+          width: Joi.number(),
+          length: Joi.number(),
+          price: Joi.number(),
+        }),
+        color: Joi.string(),
+        stock: Joi.number(),
+      })
+    )
+  ),
   image: Joi.object().keys({
     imageFile: Joi.any(),
     alt: Joi.string().min(2).max(256).required(),
