@@ -11,9 +11,9 @@ const cardSchema = new mongoose.Schema({
   description: { ...DEFAULT_STRING_SCHEMA_REQUIRED, maxLength: 1024 },
   image: Image,
   rating: {
-    //?ratingScoreTotal/ratingUsers.length=rating score
-    ratingUsersAmount: { type: Number },
-    ratingScoreTotal: { type: Number },
+    //?ratingTotalScore/ratingUsers.length=rating score
+    ratingUsers: [String],
+    ratingTotalScore: { type: Number },
   },
   sizesAvailable: [String],
   colorsAvailable: [String],

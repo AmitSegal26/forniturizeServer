@@ -6,6 +6,7 @@ const permissionsMiddleware = require("../../middleware/permissionsMiddleware");
 const authmw = require("../../middleware/authMiddleware");
 const { IDValidation } = require("../../validation/idValidationService");
 const normalizeCardService = require("../../model/cardsService/helpers/normalizationCardService");
+const CustomError = require("../../utils/CustomError");
 
 //http://localhost:8181/api/cards/allCards
 // all
@@ -33,6 +34,34 @@ router.get("/card/:id", async (req, res) => {
       return res.json({ msg: "no card found" });
     }
     res.json(cardFromDB);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+//http://localhost:8181/api/cards/getCart
+//authed
+//get all cards from cart of user
+router.get("/getCart", authmw, async (req, res) => {
+  try {
+    let userCardsArr = [];
+    let {
+      userData: { _id },
+    } = req;
+    let cardsArr = await cardsServiceModel.getAllCards();
+    if (cardsArr.length === 0) {
+      return;
+    }
+    for (const card of cardsArr) {
+      let { cart } = card;
+      for (const user of cart) {
+        if (user == _id) {
+          userCardsArr.push(card);
+          break;
+        }
+      }
+    }
+    res.status(200).json(userCardsArr);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -67,10 +96,9 @@ router.put(
   async (req, res) => {
     try {
       await cardsValidationService.cardValidation(req.body);
-      let normalCard = normalizeCardService(req.body);
       const cardFromDB = await cardsServiceModel.updateCard(
         req.params.id,
-        normalCard
+        req.body
       );
       res.json(cardFromDB);
     } catch (err) {
@@ -78,6 +106,45 @@ router.put(
     }
   }
 );
+
+//http://localhost:8181/api/cards/rate/:id
+//authed
+//rate a card
+router.patch("/rate/:id", authmw, async (req, res) => {
+  try {
+    await IDValidation(req.params.id);
+    let card = await cardsServiceModel.getCardById(req.params.id);
+    if (!card) {
+      throw new CustomError("no card found using this id");
+    }
+    let { rating } = card;
+    for (const userIdInArrayOfCard of rating.ratingUsers) {
+      if (req.userData && req.userData._id == userIdInArrayOfCard) {
+        throw new CustomError(
+          "user already rated this, able to rate only once!"
+        );
+      }
+    }
+    let { score } = req.body;
+    if (
+      typeof score == "number" &&
+      score % 1 == 0 &&
+      1 <= score &&
+      score <= 5
+    ) {
+      rating.ratingTotalScore += score;
+      rating.ratingUsers = [...rating.ratingUsers, req.userData._id];
+      card.rating = { ...rating };
+      res.status(200).json(await cardsServiceModel.updateCard(card._id, card));
+    } else {
+      throw new CustomError(
+        "invalid rating, please send an object {score:<Number (score between 1 to 5)>}"
+      );
+    }
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
 //http://localhost:8181/api/cards/cart/:id
 //authed
@@ -98,34 +165,6 @@ router.patch("/cart/:id", authmw, async (req, res) => {
       currCard.cart = [...currCard.cart, req.userData._id];
     }
     res.status(200).json(await cardsServiceModel.updateCard(cardId, currCard));
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
-//http://localhost:8181/api/cards/getCart
-//authed
-//get all cards from cart of user
-router.get("/getCart", authmw, async (req, res) => {
-  try {
-    let userCardsArr = [];
-    let {
-      userData: { _id },
-    } = req;
-    let cardsArr = await cardsServiceModel.getAllCards();
-    if (cardsArr.length === 0) {
-      return;
-    }
-    for (const card of cardsArr) {
-      let { cart } = card;
-      for (const user of cart) {
-        if (user == _id) {
-          userCardsArr.push(card);
-          break;
-        }
-      }
-    }
-    res.status(200).json(userCardsArr);
   } catch (err) {
     res.status(400).json(err);
   }

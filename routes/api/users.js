@@ -50,6 +50,28 @@ router.get(
 //register
 router.post("/register", async (req, res) => {
   try {
+    //!REMEMBER
+    /*
+    {
+      //*name:{
+        //*?first:"amit",
+        //*?last:"segal"
+      },
+      //*email:"amit@gmail.com",
+      //*password:"Aa123456!",
+      //*gender:"male",
+      //*image:{
+        //*!imageFile:{
+          //*?file:{
+            //*data:<Buffer data>,
+            //*contentType:"image/[jpg/png/jpeg/gif]"
+          }
+        },
+        //*!alt:"profile picture"
+      }
+    }
+let twoDArray=[[,,,,],[,,,,,],[,,,,,],[,,,,,]]
+    */
     await authValidationService.registerUserValidation(req.body);
     req.body.password = await hashService.generateHash(req.body.password);
     req.body = normalizeUser(req.body);
@@ -92,14 +114,11 @@ router.post("/login", async (req, res) => {
           normalizedLoginFailure
         ));
       attempts++;
-      if (attempts >= 3) {
-        attempts == 3 &&
-          (await failedLoginStoreService.incrementAttemptsOfUser(email));
+      await failedLoginStoreService.incrementAttemptsOfUser(email);
+      if (attempts == 3) {
         throw new CustomError(
           "Too many failed login attempts. Account blocked."
         );
-      } else {
-        await failedLoginStoreService.incrementAttemptsOfUser(email);
       }
       throw new CustomError("Invalid email or password");
     }

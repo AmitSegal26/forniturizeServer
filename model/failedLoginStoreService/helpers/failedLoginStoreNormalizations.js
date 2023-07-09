@@ -30,7 +30,7 @@ const handleBlockTime = async (blockedUser) => {
     failedLoginStoreService
       .removeBlockedUserFromStore(blockedUser.email)
       .catch((err) => {
-        throw new CustomError("problem removing block");
+        throw new CustomError("problem revoking block");
       });
   }
 };

@@ -11,10 +11,13 @@ const normalizeCard = (card, userId) => {
     },
     alt: card.image.alt || "default forniture image",
   };
-  card.rating = {
-    ratingScoreTotal: 0,
-    ratingUsersAmount: 0,
+  card.rating = (card.rating &&
+    card.rating.ratingTotalScore &&
+    card.rating.ratingUsers && { ...card.rating }) || {
+    ratingTotalScore: 0,
+    ratingUsers: [],
   };
+
   card.cart = card.cart || [];
   return {
     ...card,
