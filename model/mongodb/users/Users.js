@@ -1,21 +1,14 @@
 const mongoose = require("mongoose");
 const {
-  Email,
   Created_At,
   Image,
   Name,
+  Email,
 } = require("../helpersForCardsAndUsers");
 
 const schema = new mongoose.Schema({
   name: Name,
-  email: {
-    type: String,
-    require: true,
-    match: RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/),
-    lowercase: true,
-    trim: true,
-    unique: [true, "already exists"],
-  },
+  email: Email,
   gender: {
     type: String,
     required: true,
