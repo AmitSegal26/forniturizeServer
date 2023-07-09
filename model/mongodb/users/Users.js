@@ -8,7 +8,14 @@ const {
 
 const schema = new mongoose.Schema({
   name: Name,
-  email: Email,
+  email: {
+    type: String,
+    require: true,
+    match: RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/),
+    lowercase: true,
+    trim: true,
+    unique: [true, "already exists"],
+  },
   gender: {
     type: String,
     required: true,
