@@ -134,7 +134,7 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
 
 ### EDIT USER
 
-#### USAGE:Edit the user's own details
+#### USAGE:Edit the user's own details using the provided token
 
 - HTTP Method: [PUT]
 - URL End Point Request: [/users/edit/:id]
@@ -164,7 +164,7 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
         - }
       }
 
-### EDIT ADMIN STATUS
+### INVERT ADMIN STATUS
 
 #### USAGE: Invoke/revoke isAdmin boolean value
 
