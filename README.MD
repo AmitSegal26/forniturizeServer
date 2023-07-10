@@ -95,23 +95,25 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
 - Authorizations Needed: [none]
 - Requirements for body (object):
 
-  - name:{
-    - first: string, min length 2, required
-    - last: string, min length 2, required
-      }
-  - email: string, email regex (example@email.com),UNIQUE - cant proceed if already taken in the Database, required
-  - password: string, min length 8, must contain: 1 capital letter, 1 small letter, 4 digit and one
-    of the following chars {#?!@$%^&\*-}, required
-  - gender: "male"/"female"/"other"
-  - image:{
-    - imageFile:{
-      - file:{
-        - data:**<INSERT IMAGE FILE (.png,.jpg,.jpeg,.gif)>**
-        - contentType:"image/png"/"image/jpg"/"image/jpeg"/"image/gif"
+      {
+      - name:{
+        - first: string, min length 2, required
+        - last: string, min length 2, required
+          }
+      - email: string, email regex      (example@email.com),UNIQUE - cant proceed if already taken in the     Database, required
+      - password: string, min length 8, must      contain: 1 capital letter, 1 small      letter, 4 digit and one
+        of the following chars {#?!@$%^&\*-}, required
+      - gender: "male"/"female"/"other"
+      - image:{
+        - imageFile:{
+          - file:{
+            - data:**<INSERT IMAGE FILE (.png,.jpg,.jpeg,.gif)>**
+            - contentType:"image/png"/"image/jpg"/"image/jpeg"/"image/gif"
+            - }
+          - }
+        - alt: string, min length 2, max length 256, required
         - }
-      - }
-    - alt: string, min length 2, max length 256, required
-    - }
+      }
 
 ### LOGIN USER
 
@@ -122,9 +124,11 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
 - Authentication Needed (token): [No]
 - Authorizations Needed: [none]
 - Requirements for body (object):
-  - email: string, email regex (example@email.com), required
-  - password: string, min length 8, must contain: 1 capital letter, 1 small letter, 4 digit and one
-    of the following chars {\*#?!@$%^&-}, required
+
+      {
+        - email: string, email regex (example@email.com), required
+        - password: string, min length 8, must contain: 1 capital letter, 1 small letter, 4 digit and one of the following chars {\*#?!@$%^&-}, required
+      }
 
 ### EDIT USER
 
@@ -137,23 +141,26 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
 - Params:
   - [id]: [the id of the user the api should ask the info for]
 - Requirements for body (object):
-  - name:{
-    - first: string, min length 2, required
-    - last: string, min length 2, required
-      }
-  - email: string, email regex (example@email.com),UNIQUE - cant proceed if already taken in the Database, required
-  - password: string, min length 8, must contain: 1 capital letter, 1 small letter, 4 digit and one
-    of the following chars {#?!@$%^&\*-}, required
-  - gender: "male"/"female"/"other"
-  - image:{
-    - imageFile:{
-      - file:{
-        - data:**<INSERT IMAGE FILE (.png,.jpg,.jpeg,.gif)>**
-        - contentType:"image/png"/"image/jpg"/"image/jpeg"/"image/gif"
+
+      {
+      - name:{
+        - first: string, min length 2, required
+        - last: string, min length 2, required
+          }
+      - email: string, email regex (example@email.com),UNIQUE - cant proceed if already taken in    the Database, required
+      - password: string, min length 8, must contain: 1 capital letter, 1 small letter, 4 digit     and one
+        of the following chars {#?!@$%^&\*-}, required
+      - gender: "male"/"female"/"other"
+      - image:{
+        - imageFile:{
+          - file:{
+            - data:**<INSERT IMAGE FILE (.png,.jpg,.jpeg,.gif)>**
+            - contentType:"image/png"/"image/jpg"/"image/jpeg"/"image/gif"
+            - }
+          - }
+        - alt: string, min length 2, max length 256, required
         - }
-      - }
-    - alt: string, min length 2, max length 256, required
-    - }
+      }
 
 ### EDIT ADMIN STATUS
 
@@ -216,7 +223,7 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
 - Authorizations Needed: [BUSINESS]
 - Requirements for body (object):
 
-        - {
+        {
         - title: string, min length 2, max length 256, required
         - image:{
           - imageFile:{
@@ -239,12 +246,11 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
                 - height:length
                 - length:number
                 - price: number
-                - }
-              - }
-            - ]
-
-          - ]
-      - }
+                }
+              }
+            ]
+          ]
+      }
 
   - !!**NOTICE: {stock} property is 2D Array (matrix) which dedicated to managing stock for different fornitures of variety of colors and sizes, with different price for each one.**
 
@@ -260,7 +266,7 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
   - [id]: [the id of the card the api should ask the info for]
 - Requirements for body (object):
 
-       - {
+        {
         - title: string, min length 2, max length 256, required
         - image:{
           - imageFile:{
@@ -283,12 +289,11 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
                 - height:length
                 - length:number
                 - price: number
-                - }
-              - }
-            - ]
-
-          - ]
-      - }
+                }
+              }
+            ]
+          ]
+      }
 
   - !!**NOTICE: {stock} property is 2D Array (matrix) which dedicated to managing stock for different fornitures of variety of colors and sizes, with different price for each one.**
 
@@ -305,7 +310,7 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
 
 ### GET CART ITEMS OF USER
 
-#### USAGE: Returns the cards that a user has added to his cart as an Array of the card's id
+#### USAGE: Returns the cards that a user has added to his cart as an Array of the card's
 
 - HTTP Method: [PATCH]
 - URL End Point Request: [/cards/getCart]
