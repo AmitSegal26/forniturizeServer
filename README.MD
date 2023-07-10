@@ -297,9 +297,33 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
 
   - !!**NOTICE: {stock} property is 2D Array (matrix) which dedicated to managing stock for different fornitures of variety of colors and sizes, with different price for each one.**
 
-### ADD A CARD TO CART
+#### RATE A CARD
 
-#### USAGE: Adds the id of the provided token into an array of 'cart' property in the card-object
+##### USAGE: Adds to the card {rating:ratingUsers} the id of the user of the provided token and their score to the card {rating:ratingTotalScore}
+
+- HTTP Method: [PATCH]
+- URL End Point Request: [/cards/rate/:id]
+- Authentication Needed (token): [Yes]
+- Authorizations Needed: [none]
+- Params:
+  - [id]: [the id of the card the api should ask the info for]
+- Requirements for the body (object):
+
+      {
+        score: number between 1 to 5
+      }
+
+  - !!**NOTICE:** in order to calculate the average rating of the card you may use the formula:
+
+    ```javascript
+    CARD.rating.ratingTotalScore / CARD.rating.ratingUsers.length;
+    ```
+
+### CART
+
+#### ADD/REMOVE A CARD TO CART
+
+##### USAGE: Adds or removes the id of the provided token into an array of 'cart' property in the card-object
 
 - HTTP Method: [PATCH]
 - URL End Point Request: [/cards/cart/:id]
@@ -308,11 +332,11 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
 - Params:
   - [id]: [the id of the card the api should ask the info for]
 
-### GET CART ITEMS OF USER
+#### GET CART ITEMS OF USER
 
-#### USAGE: Returns the cards that a user has added to his cart as an Array of the card's
+##### USAGE: Returns the cards that contain the user's id in their {cart} property an Array of the cards
 
-- HTTP Method: [PATCH]
+- HTTP Method: [GET]
 - URL End Point Request: [/cards/getCart]
 - Authentication Needed (token): [Yes]
 - Authorizations Needed: [none]
