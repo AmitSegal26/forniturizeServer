@@ -75,6 +75,25 @@ app.use(
     optionsSuccessStatus: 200,
   })
 );
+
+//!
+app.use((req, res, next) => {
+  const originalJson = res.json;
+  res.json = function (data) {
+    res.body = data; // Store the response output in 'res.body'
+    originalJson.call(this, data);
+  };
+
+  const originalSend = res.send;
+  res.send = function (data) {
+    res.body = data; // Store the response output in 'res.body'
+    originalSend.call(this, data);
+  };
+
+  next();
+});
+//!
+
 logger.token("time", () => {
   let a = new Date();
   return a.toTimeString().split(" ")[0];
@@ -90,8 +109,9 @@ app.use(
       status: tokens.status(req, res),
       userAgent: tokens["user-agent"](req, res),
       respondTime: tokens["response-time"](req, res),
+      response: res.body,
     };
-    let logData = "";
+    let logData = "# NEW LOG #\n";
     const morganData =
       chalk.hex("#83c129").bold.underline("Request DETAILS:") +
       " " +
@@ -115,12 +135,15 @@ app.use(
         } ms`
       );
     for (let morganToken of Object.keys(morganLoggerTokens)) {
+      console.log();
       logData +=
+        (morganToken == "response" ? "\n" : "") +
         morganToken.toUpperCase() +
         ": " +
         morganLoggerTokens[morganToken] +
         " ";
     }
+    logData += "\n** END LOG **";
     if (
       morganLoggerTokens.url != "/favicon.ico" ||
       morganLoggerTokens.method != "GET"

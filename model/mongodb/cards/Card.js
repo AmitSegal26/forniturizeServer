@@ -10,7 +10,6 @@ const cardSchema = new mongoose.Schema({
   description: { ...DEFAULT_STRING_SCHEMA_REQUIRED, maxLength: 1024 },
   image: Image,
   rating: {
-    //?ratingTotalScore/ratingUsers.length=rating score
     ratingUsers: [String],
     ratingTotalScore: { type: Number },
   },

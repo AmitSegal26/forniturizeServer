@@ -1,5 +1,5 @@
 const Joi = require("joi");
-const MESSEGES = require("../messegesForValidation");
+const HELPER = require("../helpersForValidations");
 
 const createCardSchema = Joi.object({
   title: Joi.string().min(2).max(256).required(),
@@ -14,11 +14,9 @@ const createCardSchema = Joi.object({
             length: Joi.number(),
             price: Joi.number(),
           }),
-          color: Joi.string()
-            .pattern(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)
-            .messages({
-              "string.pattern.base": MESSEGES.COLOR,
-            }),
+          color: Joi.string().pattern(HELPER.REGEXES.COLOR).messages({
+            "string.pattern.base": HELPER.MESSEGES.COLOR,
+          }),
           stock: Joi.number(),
         })
       )

@@ -5,6 +5,7 @@ const {
   Name,
   Email,
 } = require("../helpersForCardsAndUsers");
+const { REGEXES } = require("../../../validation/helpersForValidations");
 
 const schema = new mongoose.Schema({
   name: Name,
@@ -17,9 +18,6 @@ const schema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    match: RegExp(
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
-    ),
   },
   image: Image,
   isAdmin: { type: Boolean, default: false },

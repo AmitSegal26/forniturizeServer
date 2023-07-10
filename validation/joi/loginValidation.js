@@ -1,19 +1,19 @@
 const Joi = require("joi");
-const MESSEGES = require("../messegesForValidation");
+const HELPER = require("../helpersForValidations");
 
 const loginSchema = Joi.object({
   email: Joi.string()
-    .pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/)
+    .pattern(HELPER.REGEXES.EMAIL)
     .messages({
-      "string.pattern.base": MESSEGES.EMAIL,
+      "string.pattern.base": HELPER.MESSEGES.EMAIL,
     })
     .min(6)
     .max(256)
     .required(),
   password: Joi.string()
-    .pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)
+    .pattern(HELPER.REGEXES.PASSWORD)
     .messages({
-      "string.pattern.base": MESSEGES.PASSWORD,
+      "string.pattern.base": HELPER.MESSEGES.PASSWORD,
     })
     .required(),
 });

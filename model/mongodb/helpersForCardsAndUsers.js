@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { UploadSchema } = require("./Upload");
+const { REGEXES } = require("../../validation/helpersForValidations");
 
 const DEFAULT_STRING_SCHEMA = {
   type: String,
@@ -15,7 +16,7 @@ const DEFAULT_STRING_SCHEMA_REQUIRED = {
 const Email = {
   type: String,
   require: true,
-  match: RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/),
+  match: RegExp(REGEXES.EMAIL),
   lowercase: true,
   trim: true,
   unique: true,
