@@ -56,6 +56,8 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
 
 ### **Recommended default URL for proxy: /api**
 
+## USERS
+
 ### GET ALL USERS
 
 #### USAGE: get all users info on the DB
@@ -70,7 +72,7 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
 #### USAGE: get user info from the DB
 
 - HTTP Method: [GET]
-- URL End Point Request: [/users/users/:id]
+- URL End Point Request: [/users/user/:id]
 - Authentication Needed (token): [Yes]
 - Authorizations Needed: [ADMIN]
 - Params:
@@ -193,6 +195,8 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
 - Params:
   - [id]: [the id of the user the api should ask the info for]
 
+## CARDS
+
 ### GET ALL CARDS
 
 #### USAGE: Recieve an array containing all the card in the DB
@@ -220,7 +224,7 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
 - HTTP Method: [POST]
 - URL End Point Request: [/cards/create]
 - Authentication Needed (token): [Yes]
-- Authorizations Needed: [BUSINESS]
+- Authorizations Needed: [ADMIN]
 - Requirements for body (object):
 
         {
@@ -261,7 +265,7 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
 - HTTP Method: [PUT]
 - URL End Point Request: [/cards/edit/:id]
 - Authentication Needed (token): [Yes]
-- Authorizations Needed: [ADMIN ONLY]
+- Authorizations Needed: [ADMIN]
 - Params:
   - [id]: [the id of the card the api should ask the info for]
 - Requirements for body (object):
