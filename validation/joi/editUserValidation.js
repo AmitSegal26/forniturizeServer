@@ -1,4 +1,5 @@
 const Joi = require("joi");
+const MESSEGES = require("../messegesForValidation");
 
 const editUserSchema = Joi.object({
   name: Joi.object()
@@ -9,9 +10,10 @@ const editUserSchema = Joi.object({
     .required(),
   gender: Joi.string().allow("male").allow("female").allow("other"),
   email: Joi.string()
-    .regex(
-      new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/)
-    )
+    .pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/)
+    .messages({
+      "string.pattern.base": MESSEGES.EMAIL,
+    })
     .min(6)
     .max(256)
     .required(),

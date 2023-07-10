@@ -9,7 +9,7 @@
 ## Server's Characteristics
 
 - The server is logging in the console for every request is sent through the server, it is written in a way you should be able to read and understand.
-- the server is made for managing the Database with business cards and serve a few commands that will be detailed and explained at the API DOCS.
+- the server is made for managing the Database with cards about forniture and serve a few commands that will be detailed and explained at the API DOCS.
 
 ## Google API Integration
 
@@ -25,6 +25,7 @@ When connecting to the server, you will encounter the following messages:
 - Connection to MongoDB => [LOCAL or ATLAS]
 - Server running on http://localhost:8181/
 - Connected to MongoDB
+- **MAKE SURE YOU HAVE ALL THOSE MESSEGES BEFORE CONTNUING USING THE SERVER**
 
 ## Environment Setup
 
@@ -39,11 +40,9 @@ Certain API endpoints may require specific inputs from the client. Please refer 
 
 ## Authorization and Authentication
 
-To access certain endpoints, [AUTHORIZATION known as TOKEN] and [AUTHENTICATION such as ADMIN or Business User] may be required. Please refer to the documentation for each API to understand the authorization and authentication process.
+To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-auth-token" - put the token out put recieved from the {http://localhost8181/api/users/login} url inside the given key name in the request header*] and [AUTHENTICATION such as ADMIN] may be required. Please refer to the documentation for each API to understand the authorization and authentication process.
 
-## BONUSES INCLUDED
-
-- ### You may change bizNumber for a card for as long as its not already occupied by another bizCard
+## FEATURES
 
 - ### You may login or register using the google API using the front page (expanded explanation at the paragraph above)
 
@@ -53,15 +52,15 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN] and [AUTHENTICATION 
 
 ## API Documentation
 
-### **proxy:http://localhost:8181/**
+### **url:http://localhost:8181/**
 
-### **Default URL for proxy: /api**
+### **Recommended default URL for proxy: /api**
 
 ### GET ALL USERS
 
 #### USAGE: get all users info on the DB
 
-- REST Method: [GET]
+- HTTP Method: [GET]
 - URL End Point Request: [/users/users]
 - Authentication Needed (token): [Yes]
 - Authorizations Needed: [ADMIN]
@@ -70,7 +69,7 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN] and [AUTHENTICATION 
 
 #### USAGE: get user info from the DB
 
-- REST Method: [GET]
+- HTTP Method: [GET]
 - URL End Point Request: [/users/users/:id]
 - Authentication Needed (token): [Yes]
 - Authorizations Needed: [ADMIN]
@@ -81,98 +80,89 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN] and [AUTHENTICATION 
 
 #### USAGE: get user info from the DB using token info for themselves
 
-- REST Method: [GET]
-- URL End Point Request: [/users/users/:id]
+- HTTP Method: [GET]
+- URL End Point Request: [/users/userInfo]
 - Authentication Needed (token): [Yes]
 - Authorizations Needed: [none]
-- Params:
-  - [id]: [the id of the user the api should ask the info for]
 
 ### REGISTER USER
 
 #### USAGE: Register a user into the DB
 
-- REST Method: [POST]
-- URL End Point Request: [/users/users]
+- HTTP Method: [POST]
+- URL End Point Request: [/users/register]
 - Authentication Needed (token): [No]
 - Authorizations Needed: [none]
 - Requirements for body (object):
 
-  - name{
+  - name:{
     - first: string, min length 2, required
-    - middle: string, min length 2
     - last: string, min length 2, required
       }
-  - email: string, email regex (example@email.com), required
-  - phone: string, phone (05X-123456789), required
-  - password: string, min length 8, must contain: 1 capital letter, 1 small letter, 1 digit and one
+  - email: string, email regex (example@email.com),UNIQUE - cant proceed if already taken in the Database, required
+  - password: string, min length 8, must contain: 1 capital letter, 1 small letter, 4 digit and one
     of the following chars {#?!@$%^&\*-}, required
-  - image{
-    - url: string, must be url, required
+  - gender: "male"/"female"/"other"
+  - image:{
+    - imageFile:{
+      - file:{
+        - data:**<INSERT IMAGE FILE (.png,.jpg,.jpeg,.gif)>**
+        - contentType:"image/png"/"image/jpg"/"image/jpeg"/"image/gif"
+        - }
+      - }
     - alt: string, min length 2, max length 256, required
-      }
-  - address{
-    - state: string, min length 2, max length 256
-    - country: string, min length 2, max length 256, required
-    - city: string, min length 2, max length 256, required
-    - street: string, min length 2, max length 256, required
-    - houseNumber: string, min length 2, max length 256, required
-    - zip: number, required
-      }
-  - isBusiness: boolean, required
+    - }
 
 ### LOGIN USER
 
 #### USAGE: Recieve a token from the server for a user
 
-- REST Method: [POST]
+- HTTP Method: [POST]
 - URL End Point Request: [/users/login]
 - Authentication Needed (token): [No]
 - Authorizations Needed: [none]
 - Requirements for body (object):
   - email: string, email regex (example@email.com), required
-  - password: string, min length 8, must contain: 1 capital letter, 1 small letter, 1 digit and one
+  - password: string, min length 8, must contain: 1 capital letter, 1 small letter, 4 digit and one
     of the following chars {\*#?!@$%^&-}, required
 
 ### EDIT USER
 
 #### USAGE:Edit the user's own details
 
-- REST Method: [PUT]
-- URL End Point Request: [/users/users/:id]
+- HTTP Method: [PUT]
+- URL End Point Request: [/users/edit/:id]
 - Authentication Needed (token): [Yes]
 - Authorizations Needed: [none]
 - Params:
   - [id]: [the id of the user the api should ask the info for]
 - Requirements for body (object):
-  - name{
+  - name:{
     - first: string, min length 2, required
-    - middle: string, min length 2
     - last: string, min length 2, required
       }
-  - phone: string, phone (05X-123456789), required
-  - image{
-    - url: string, must be url, required
+  - email: string, email regex (example@email.com),UNIQUE - cant proceed if already taken in the Database, required
+  - password: string, min length 8, must contain: 1 capital letter, 1 small letter, 4 digit and one
+    of the following chars {#?!@$%^&\*-}, required
+  - gender: "male"/"female"/"other"
+  - image:{
+    - imageFile:{
+      - file:{
+        - data:**<INSERT IMAGE FILE (.png,.jpg,.jpeg,.gif)>**
+        - contentType:"image/png"/"image/jpg"/"image/jpeg"/"image/gif"
+        - }
+      - }
     - alt: string, min length 2, max length 256, required
-      }
-  - address{
-    - state: string, min length 2, max length 256
-    - country: string, min length 2, max length 256, required
-    - city: string, min length 2, max length 256, required
-    - street: string, min length 2, max length 256, required
-    - houseNumber: string, min length 2, max length 256, required
-    - zip: number, required
-      }
-  - isBusiness: boolean, required
+    - }
 
-### EDIT BUSINESS STATUS
+### EDIT ADMIN STATUS
 
-#### USAGE: Invoke/revoke isBusiness boolean value
+#### USAGE: Invoke/revoke isAdmin boolean value
 
-- REST Method: [PATCH]
-- URL End Point Request: [users/users/:id]
+- HTTP Method: [PATCH]
+- URL End Point Request: [users/user/:id]
 - Authentication Needed (token): [Yes]
-- Authorizations Needed: [none]
+- Authorizations Needed: [ADMIN]
 - Params:
   - [id]: [the id of the user the api should ask the info for]
 
@@ -180,20 +170,17 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN] and [AUTHENTICATION 
 
 #### USAGE: Delete the user of the given token from the DB
 
-- REST Method: [DELETE]
-- URL End Point Request: [/users/users/:id]
+- HTTP Method: [DELETE]
+- URL End Point Request: [/users/deleteSelf]
 - Authentication Needed (token): [Yes]
 - Authorizations Needed: [none]
-- Params:
-  - [id]: [the id of the user the api should ask the info for]
 
 ### DELETE A USER
 
 #### USAGE: Delete a user from the DB
 
-- REST Method: [DELETE]
-
-- URL End Point Request: [/users/users/:id]
+- HTTP Method: [DELETE]
+- URL End Point Request: [/users/delete/:id]
 - Authentication Needed (token): [Yes]
 - Authorizations Needed: [ADMIN]
 - Params:
@@ -203,7 +190,7 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN] and [AUTHENTICATION 
 
 #### USAGE: Recieve an array containing all the card in the DB
 
-- REST Method: [GET]
+- HTTP Method: [GET]
 - URL End Point Request: [/cards/cards]
 - Authentication Needed (token): [No]
 - Authorizations Needed: [none]
@@ -212,94 +199,126 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN] and [AUTHENTICATION 
 
 #### USAGE: Recieve Information of a specific card
 
-- REST Method: [GET]
-- URL End Point Request: [/cards/cards/:id]
+- HTTP Method: [GET]
+- URL End Point Request: [/cards/card/:id]
 - Authentication Needed (token): [No]
 - Authorizations Needed: [none]
 - Params:
   - [id]: [the id of the card the api should ask the info for]
 
-### GET USER'S CARDS
-
-#### USAGE: Recieve an array containing all the cards made by specific user provided by token
-
-- REST Method: [GET]
-- URL End Point Request: [/cards/my-cards]
-- Authentication Needed (token): [Yes(owner)]
-- Authorizations Needed: [none]
-
 ### CREATE A CARD
 
 #### USAGE: Create a card file into the DB
 
-- REST Method: [POST]
-- URL End Point Request: [/cards/cards]
+- HTTP Method: [POST]
+- URL End Point Request: [/cards/create]
 - Authentication Needed (token): [Yes]
 - Authorizations Needed: [BUSINESS]
 - Requirements for body (object):
-  - title: string, min length 2, max length 256, required
-  - subtitle: string, min length 2, max length 256, required
-  - email: string, regex of email (example@email.com), required
-  - web: string, regex of url
-  - image{
-    - url: string, must be url, required
-    - alt: string, min length 2, max length 256, required
-      }
-  - address{
-    - state: string, min length 2, max length 256
-    - country: string, min length 2, max length 256, required
-    - city: string, min length 2, max length 256, required
-    - street: string, min length 2, max length 256, required
-    - houseNumber: string, min length 2, max length 256, required
-    - zip: number, required
-      }
+
+        - {
+        - title: string, min length 2, max length 256, required
+        - image:{
+          - imageFile:{
+            - file:{
+              - data:**<INSERT IMAGE FILE (.png,.jpg,.jpeg,.gif)>**
+              - contentType:"image/png"/"image/jpg"/"image/jpeg"/"image/gif"
+              - }
+            - }
+          - alt: string, min length 2, max length 256, required
+          - }
+        - stock:[
+
+          - [
+
+            - {
+              - color:<Hexadecimal string color code> EXAMPLE: "#abcdef"
+              - stock:number
+              - size:{
+                - width:number
+                - height:length
+                - length:number
+                - price: number
+                - }
+              - }
+            - ]
+
+          - ]
+      - }
+
+  - !!**NOTICE: {stock} property is 2D Array (matrix) which dedicated to managing stock for different fornitures of variety of colors and sizes, with different price for each one.**
 
 ### EDIT A CARD
 
 #### USAGE: Edit the card's details on the DB
 
-- REST Method: [PUT]
-- URL End Point Request: [/cards/cards/:id]
-- Authentication Needed (token): [Yes(owner)]
-- Authorizations Needed: [CARD OWNER ONLY]
+- HTTP Method: [PUT]
+- URL End Point Request: [/cards/edit/:id]
+- Authentication Needed (token): [Yes]
+- Authorizations Needed: [ADMIN ONLY]
 - Params:
   - [id]: [the id of the card the api should ask the info for]
 - Requirements for body (object):
-  - title: string, min length 2, max length 256, required
-  - subtitle: string, min length 2, max length 256, required
-  - email: string, regex of email (example@email.com), required
-  - web: string, regex of url
-  - image{
-    - url: string, must be url, required
-    - alt: string, min length 2, max length 256, required
-      }
-  - address{
-    - state: string, min length 2, max length 256
-    - country: string, min length 2, max length 256, required
-    - city: string, min length 2, max length 256, required
-    - street: string, min length 2, max length 256, required
-    - houseNumber: string, min length 2, max length 256, required
-    - zip: number, required
-      }
 
-### LIKE A CARD
+       - {
+        - title: string, min length 2, max length 256, required
+        - image:{
+          - imageFile:{
+            - file:{
+              - data:**<INSERT IMAGE FILE (.png,.jpg,.jpeg,.gif)>**
+              - contentType:"image/png"/"image/jpg"/"image/jpeg"/"image/gif"
+              - }
+            - }
+          - alt: string, min length 2, max length 256, required
+          - }
+        - stock:[
 
-#### USAGE: Adds the id of the provided token into an array of 'likes' property in the card-object
+          - [
 
-- REST Method: [PATCH]
-- URL End Point Request: [/cards/cards/:id]
+            - {
+              - color:<Hexadecimal string color code> EXAMPLE: "#abcdef"
+              - stock:number
+              - size:{
+                - width:number
+                - height:length
+                - length:number
+                - price: number
+                - }
+              - }
+            - ]
+
+          - ]
+      - }
+
+  - !!**NOTICE: {stock} property is 2D Array (matrix) which dedicated to managing stock for different fornitures of variety of colors and sizes, with different price for each one.**
+
+### ADD A CARD TO CART
+
+#### USAGE: Adds the id of the provided token into an array of 'cart' property in the card-object
+
+- HTTP Method: [PATCH]
+- URL End Point Request: [/cards/cart/:id]
 - Authentication Needed (token): [Yes]
 - Authorizations Needed: [none]
 - Params:
   - [id]: [the id of the card the api should ask the info for]
 
+### GET CART ITEMS OF USER
+
+#### USAGE: Returns the cards that a user has added to his cart as an Array of the card's id
+
+- HTTP Method: [PATCH]
+- URL End Point Request: [/cards/getCart]
+- Authentication Needed (token): [Yes]
+- Authorizations Needed: [none]
+
 ### DELETE A CARD
 
 #### USAGE: Delete a card from the DB
 
-- REST Method: [DELETE]
-- URL End Point Request: [/cards/cards/:id]
+- HTTP Method: [DELETE]
+- URL End Point Request: [/cards/delete/:id]
 - Authentication Needed (token): [Yes]
-- Authorizations Needed: [ADMIN/OWNER OF CARD]
+- Authorizations Needed: [ADMIN]
 - Params:
   - [id]: [the id of the card the api should ask the info for]

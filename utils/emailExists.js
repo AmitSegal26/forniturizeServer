@@ -7,5 +7,17 @@ const handleEmailExistsErrorFromMongoose = (err) => {
         : err,
   };
 };
-
+/*
+let stringArr => "MongoServer" => [`M`,`o`,`n`,`g`,`o`,`S`,`e`,`r`,`v`,`e`,`r`] 
+stringArr.includes("Mongo")
+err.title.includes("Mongo") && err.price==11000
+  err{
+    title:"MongoServerError",
+    price:11000
+    .
+    .
+    .
+    .
+  }
+*/
 module.exports = handleEmailExistsErrorFromMongoose;

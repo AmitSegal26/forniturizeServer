@@ -28,12 +28,12 @@ router.get(
   }
 );
 //http://localhost:8181/api/users/user/:id
-//token for themselves or admin for any user
+//admin for any user
 //get information about the user
 router.get(
   "/user/:id",
   authmw,
-  permissionsMiddleware(true, true),
+  permissionsMiddleware(true, false),
   async (req, res) => {
     try {
       let user = await usersServiceModel.getUserById(req.params.id);
@@ -46,6 +46,22 @@ router.get(
     }
   }
 );
+//http://localhost:8181/api/users/userInfo
+//token for themselves
+//get information about the user using the token
+router.get("/userInfo", authmw, async (req, res) => {
+  try {
+    if (req.userData) {
+      res
+        .status(200)
+        .json(await usersServiceModel.getUserById(req.userData._id));
+    } else {
+      throw new CustomError("something went wrong, try again later");
+    }
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 //http://localhost:8181/api/users/register
 //all
 //register
@@ -71,7 +87,6 @@ router.post("/register", async (req, res) => {
         //*!alt:"profile picture"
       }
     }
-let twoDArray=[[,,,,],[,,,,,],[,,,,,],[,,,,,]]
     */
     await authValidationService.registerUserValidation(req.body);
     req.body.password = await hashService.generateHash(req.body.password);
@@ -175,7 +190,7 @@ router.patch(
 router.delete(
   "/delete/:id",
   authmw,
-  permissionsMiddleware(true, true),
+  permissionsMiddleware(true, false),
   async (req, res) => {
     try {
       let user = await usersServiceModel.deleteOneUser(req.params.id);
@@ -188,4 +203,17 @@ router.delete(
     }
   }
 );
+router.delete("/deleteSelf", authmw, async (req, res) => {
+  try {
+    if (req.userData) {
+      res
+        .status(200)
+        .json(await usersServiceModel.deleteOneUser(req.userData._id));
+    } else {
+      throw new CustomError("something went wrong, try again later");
+    }
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 module.exports = router;
