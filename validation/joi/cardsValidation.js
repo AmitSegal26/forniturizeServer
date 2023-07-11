@@ -6,21 +6,26 @@ const createCardSchema = Joi.object({
   description: Joi.string().min(2).max(1024).required(),
   stock: Joi.array()
     .items(
-      Joi.array().items(
-        Joi.object({
-          size: Joi.object({
-            height: Joi.number(),
-            width: Joi.number(),
-            length: Joi.number(),
-          }),
-          price: Joi.number(),
-          color: Joi.string().pattern(HELPER.REGEXES.COLOR).messages({
-            "string.pattern.base": HELPER.MESSEGES.COLOR,
-          }),
-          cart: Joi.array().items(Joi.string()),
-          stock: Joi.number(),
-        })
-      )
+      Joi.array()
+        .items(
+          Joi.object({
+            size: Joi.object({
+              height: Joi.number().min(0),
+              width: Joi.number().min(0),
+              length: Joi.number().min(0),
+            }).required(),
+            price: Joi.number().min(0).required(),
+            color: Joi.string()
+              .pattern(HELPER.REGEXES.COLOR)
+              .messages({
+                "string.pattern.base": HELPER.MESSEGES.COLOR,
+              })
+              .required(),
+            cart: Joi.array().items(Joi.string()).required(),
+            stock: Joi.number().min(0).required(),
+          }).required()
+        )
+        .required()
     )
     .required(),
   image: Joi.object().keys({

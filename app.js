@@ -135,7 +135,6 @@ app.use(
         } ms`
       );
     for (let morganToken of Object.keys(morganLoggerTokens)) {
-      console.log();
       logData +=
         (morganToken == "response" ? "\n" : "") +
         morganToken.toUpperCase() +
