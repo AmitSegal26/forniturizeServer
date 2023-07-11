@@ -10,9 +10,9 @@ const createCardSchema = Joi.object({
         .items(
           Joi.object({
             size: Joi.object({
-              height: Joi.number().min(0),
-              width: Joi.number().min(0),
-              length: Joi.number().min(0),
+              height: Joi.number().min(0).required(),
+              width: Joi.number().min(0).required(),
+              length: Joi.number().min(0).required(),
             }).required(),
             price: Joi.number().min(0).required(),
             color: Joi.string()
