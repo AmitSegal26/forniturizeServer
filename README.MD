@@ -108,11 +108,9 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
       - gender: "male"/"female"/"other"
       - image:{
         - imageFile:{
-          - file:{
             - data:**<INSERT IMAGE FILE (.png,.jpg,.jpeg,.gif)>**
             - contentType:"image/png"/"image/jpg"/"image/jpeg"/"image/gif"
             - }
-          - }
         - alt: string, min length 2, max length 256, required
         - }
       }
@@ -155,11 +153,9 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
       - gender: "male"/"female"/"other"
       - image:{
         - imageFile:{
-          - file:{
             - data:**<INSERT IMAGE FILE (.png,.jpg,.jpeg,.gif)>**
             - contentType:"image/png"/"image/jpg"/"image/jpeg"/"image/gif"
             - }
-          - }
         - alt: string, min length 2, max length 256, required
         - }
       }
@@ -231,10 +227,8 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
         - title: string, min length 2, max length 256, required
         - image:{
           - imageFile:{
-            - file:{
-              - data:**<INSERT IMAGE FILE (.png,.jpg,.jpeg,.gif)>**
-              - contentType:"image/png"/"image/jpg"/"image/jpeg"/"image/gif"
-              - }
+            - data:**<INSERT IMAGE FILE (.png,.jpg,.jpeg,.gif)>**
+            - contentType:"image/png"/"image/jpg"/"image/jpeg"/"image/gif"
             - }
           - alt: string, min length 2, max length 256, required
           - }
@@ -282,10 +276,8 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
         - title: string, min length 2, max length 256, required
         - image:{
           - imageFile:{
-            - file:{
-              - data:**<INSERT IMAGE FILE (.png,.jpg,.jpeg,.gif)>**
-              - contentType:"image/png"/"image/jpg"/"image/jpeg"/"image/gif"
-              - }
+            - data:**<INSERT IMAGE FILE (.png,.jpg,.jpeg,.gif)>**
+            - contentType:"image/png"/"image/jpg"/"image/jpeg"/"image/gif"
             - }
           - alt: string, min length 2, max length 256, required
           - }
