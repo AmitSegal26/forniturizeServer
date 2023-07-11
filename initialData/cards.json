@@ -5,96 +5,132 @@
     "stock": [
       [
         {
-          "size": { "height": 40, "width": 40, "length": 40, "price": 100 },
+          "size": { "height": 40, "width": 40, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 18
         },
         {
-          "size": { "height": 120, "width": 50, "length": 120, "price": 100 },
+          "size": { "height": 120, "width": 50, "length": 120 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 27
         },
         {
-          "size": { "height": 130, "width": 60, "length": 40, "price": 100 },
+          "size": { "height": 130, "width": 60, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 48
         },
         {
-          "size": { "height": 65, "width": 40, "length": 90, "price": 100 },
+          "size": { "height": 65, "width": 40, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 54
         },
         {
-          "size": { "height": 40, "width": 80, "length": 90, "price": 100 },
+          "size": { "height": 40, "width": 80, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 21
         },
         {
-          "size": { "height": 100, "width": 100, "length": 70, "price": 100 },
+          "size": { "height": 100, "width": 100, "length": 70 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 67
         }
       ],
       [
         {
-          "size": { "height": 40, "width": 40, "length": 40, "price": 100 },
+          "size": { "height": 40, "width": 40, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 26
         },
         {
-          "size": { "height": 120, "width": 50, "length": 120, "price": 100 },
+          "size": { "height": 120, "width": 50, "length": 120 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 53
         },
         {
-          "size": { "height": 130, "width": 60, "length": 40, "price": 100 },
+          "size": { "height": 130, "width": 60, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 69
         },
         {
-          "size": { "height": 65, "width": 40, "length": 90, "price": 100 },
+          "size": { "height": 65, "width": 40, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 53
         },
         {
-          "size": { "height": 40, "width": 80, "length": 90, "price": 100 },
+          "size": { "height": 40, "width": 80, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 19
         },
         {
-          "size": { "height": 100, "width": 100, "length": 70, "price": 100 },
+          "size": { "height": 100, "width": 100, "length": 70 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 44
         }
       ],
       [
         {
-          "size": { "height": 40, "width": 40, "length": 40, "price": 100 },
+          "size": { "height": 40, "width": 40, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 64
         },
         {
-          "size": { "height": 120, "width": 50, "length": 120, "price": 100 },
+          "size": { "height": 120, "width": 50, "length": 120 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 81
         },
         {
-          "size": { "height": 130, "width": 60, "length": 40, "price": 100 },
+          "size": { "height": 130, "width": 60, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 31
         },
         {
-          "size": { "height": 65, "width": 40, "length": 90, "price": 100 },
+          "size": { "height": 65, "width": 40, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 48
         },
         {
-          "size": { "height": 40, "width": 80, "length": 90, "price": 100 },
+          "size": { "height": 40, "width": 80, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 14
         },
         {
-          "size": { "height": 100, "width": 100, "length": 70, "price": 100 },
+          "size": { "height": 100, "width": 100, "length": 70 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 46
         }
@@ -107,96 +143,132 @@
     "stock": [
       [
         {
-          "size": { "height": 40, "width": 40, "length": 40, "price": 100 },
+          "size": { "height": 40, "width": 40, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 18
         },
         {
-          "size": { "height": 120, "width": 50, "length": 120, "price": 100 },
+          "size": { "height": 120, "width": 50, "length": 120 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 27
         },
         {
-          "size": { "height": 130, "width": 60, "length": 40, "price": 100 },
+          "size": { "height": 130, "width": 60, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 48
         },
         {
-          "size": { "height": 65, "width": 40, "length": 90, "price": 100 },
+          "size": { "height": 65, "width": 40, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 54
         },
         {
-          "size": { "height": 40, "width": 80, "length": 90, "price": 100 },
+          "size": { "height": 40, "width": 80, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 21
         },
         {
-          "size": { "height": 100, "width": 100, "length": 70, "price": 100 },
+          "size": { "height": 100, "width": 100, "length": 70 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 67
         }
       ],
       [
         {
-          "size": { "height": 40, "width": 40, "length": 40, "price": 100 },
+          "size": { "height": 40, "width": 40, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 26
         },
         {
-          "size": { "height": 120, "width": 50, "length": 120, "price": 100 },
+          "size": { "height": 120, "width": 50, "length": 120 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 53
         },
         {
-          "size": { "height": 130, "width": 60, "length": 40, "price": 100 },
+          "size": { "height": 130, "width": 60, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 69
         },
         {
-          "size": { "height": 65, "width": 40, "length": 90, "price": 100 },
+          "size": { "height": 65, "width": 40, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 53
         },
         {
-          "size": { "height": 40, "width": 80, "length": 90, "price": 100 },
+          "size": { "height": 40, "width": 80, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 19
         },
         {
-          "size": { "height": 100, "width": 100, "length": 70, "price": 100 },
+          "size": { "height": 100, "width": 100, "length": 70 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 44
         }
       ],
       [
         {
-          "size": { "height": 40, "width": 40, "length": 40, "price": 100 },
+          "size": { "height": 40, "width": 40, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 64
         },
         {
-          "size": { "height": 120, "width": 50, "length": 120, "price": 100 },
+          "size": { "height": 120, "width": 50, "length": 120 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 81
         },
         {
-          "size": { "height": 130, "width": 60, "length": 40, "price": 100 },
+          "size": { "height": 130, "width": 60, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 31
         },
         {
-          "size": { "height": 65, "width": 40, "length": 90, "price": 100 },
+          "size": { "height": 65, "width": 40, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 48
         },
         {
-          "size": { "height": 40, "width": 80, "length": 90, "price": 100 },
+          "size": { "height": 40, "width": 80, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 14
         },
         {
-          "size": { "height": 100, "width": 100, "length": 70, "price": 100 },
+          "size": { "height": 100, "width": 100, "length": 70 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 46
         }
@@ -209,96 +281,132 @@
     "stock": [
       [
         {
-          "size": { "height": 40, "width": 40, "length": 40, "price": 100 },
+          "size": { "height": 40, "width": 40, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 18
         },
         {
-          "size": { "height": 120, "width": 50, "length": 120, "price": 100 },
+          "size": { "height": 120, "width": 50, "length": 120 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 27
         },
         {
-          "size": { "height": 130, "width": 60, "length": 40, "price": 100 },
+          "size": { "height": 130, "width": 60, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 48
         },
         {
-          "size": { "height": 65, "width": 40, "length": 90, "price": 100 },
+          "size": { "height": 65, "width": 40, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 54
         },
         {
-          "size": { "height": 40, "width": 80, "length": 90, "price": 100 },
+          "size": { "height": 40, "width": 80, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 21
         },
         {
-          "size": { "height": 100, "width": 100, "length": 70, "price": 100 },
+          "size": { "height": 100, "width": 100, "length": 70 },
+          "price": 100,
+          "cart": [],
           "color": "#a65f21",
           "stock": 67
         }
       ],
       [
         {
-          "size": { "height": 40, "width": 40, "length": 40, "price": 100 },
+          "size": { "height": 40, "width": 40, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 26
         },
         {
-          "size": { "height": 120, "width": 50, "length": 120, "price": 100 },
+          "size": { "height": 120, "width": 50, "length": 120 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 53
         },
         {
-          "size": { "height": 130, "width": 60, "length": 40, "price": 100 },
+          "size": { "height": 130, "width": 60, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 69
         },
         {
-          "size": { "height": 65, "width": 40, "length": 90, "price": 100 },
+          "size": { "height": 65, "width": 40, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 53
         },
         {
-          "size": { "height": 40, "width": 80, "length": 90, "price": 100 },
+          "size": { "height": 40, "width": 80, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 19
         },
         {
-          "size": { "height": 100, "width": 100, "length": 70, "price": 100 },
+          "size": { "height": 100, "width": 100, "length": 70 },
+          "price": 100,
+          "cart": [],
           "color": "#f61fa1",
           "stock": 44
         }
       ],
       [
         {
-          "size": { "height": 40, "width": 40, "length": 40, "price": 100 },
+          "size": { "height": 40, "width": 40, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 64
         },
         {
-          "size": { "height": 120, "width": 50, "length": 120, "price": 100 },
+          "size": { "height": 120, "width": 50, "length": 120 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 81
         },
         {
-          "size": { "height": 130, "width": 60, "length": 40, "price": 100 },
+          "size": { "height": 130, "width": 60, "length": 40 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 31
         },
         {
-          "size": { "height": 65, "width": 40, "length": 90, "price": 100 },
+          "size": { "height": 65, "width": 40, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 48
         },
         {
-          "size": { "height": 40, "width": 80, "length": 90, "price": 100 },
+          "size": { "height": 40, "width": 80, "length": 90 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 14
         },
         {
-          "size": { "height": 100, "width": 100, "length": 70, "price": 100 },
+          "size": { "height": 100, "width": 100, "length": 70 },
+          "price": 100,
+          "cart": [],
           "color": "#36ff48",
           "stock": 46
         }

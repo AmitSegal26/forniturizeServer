@@ -18,9 +18,6 @@ const schema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    match: new RegExp(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d.*\d.*\d.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,1000}$/
-    ),
   },
   image: Image,
   isAdmin: { type: Boolean, default: false },

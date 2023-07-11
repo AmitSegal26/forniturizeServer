@@ -13,7 +13,6 @@ const cardSchema = new mongoose.Schema({
     ratingUsers: [String],
     ratingTotalScore: { type: Number },
   },
-  cart: [String],
   stock: [
     [
       {
@@ -21,8 +20,9 @@ const cardSchema = new mongoose.Schema({
           height: { type: Number },
           width: { type: Number },
           length: { type: Number },
-          price: { type: Number },
         },
+        price: { type: Number },
+        cart: [String],
         color: { type: String },
         stock: { type: Number },
       },

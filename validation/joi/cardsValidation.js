@@ -12,11 +12,12 @@ const createCardSchema = Joi.object({
             height: Joi.number(),
             width: Joi.number(),
             length: Joi.number(),
-            price: Joi.number(),
           }),
+          price: Joi.number(),
           color: Joi.string().pattern(HELPER.REGEXES.COLOR).messages({
             "string.pattern.base": HELPER.MESSEGES.COLOR,
           }),
+          cart: Joi.array().items(Joi.string()),
           stock: Joi.number(),
         })
       )
