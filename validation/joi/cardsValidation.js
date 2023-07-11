@@ -21,7 +21,6 @@ const createCardSchema = Joi.object({
                 "string.pattern.base": HELPER.MESSEGES.COLOR,
               })
               .required(),
-            cart: Joi.array().items(Joi.string()).required(),
             stock: Joi.number().min(0).required(),
           }).required()
         )
