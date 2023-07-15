@@ -67,27 +67,6 @@ router.get("/userInfo", authmw, async (req, res) => {
 //register
 router.post("/register", async (req, res) => {
   try {
-    //!REMEMBER
-    /*
-    {
-      //*name:{
-        //*?first:"amit",
-        //*?last:"segal"
-      },
-      //*email:"amit@gmail.com",
-      //*password:"Aa123456!",
-      //*gender:"male",
-      //*image:{
-        //*!imageFile:{
-          //*?file:{
-            //*data:<Buffer data>,
-            //*contentType:"image/[jpg/png/jpeg/gif]"
-          }
-        },
-        //*!alt:"profile picture"
-      }
-    }
-    */
     await authValidationService.registerUserValidation(req.body);
     req.body.password = await hashService.generateHash(req.body.password);
     req.body = normalizeUser(req.body);

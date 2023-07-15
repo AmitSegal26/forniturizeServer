@@ -6,7 +6,6 @@ const UploadSchema = new mongoose.Schema({
   contentType: {
     type: String,
     enum: ["image/png", "image/jpeg", "image/jpg", "image/gif"],
-    required: true,
   },
 });
 

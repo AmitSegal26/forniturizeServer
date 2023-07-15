@@ -23,10 +23,12 @@ const registerSchema = Joi.object({
       "string.pattern.base": HELPER.MESSEGES.PASSWORD,
     })
     .required(),
-  image: Joi.object().keys({
-    imageFile: Joi.any(),
-    alt: Joi.string().min(2).max(256).required(),
-  }),
+  image: Joi.object()
+    .keys({
+      imageFile: Joi.any(),
+      alt: Joi.string().min(2).max(256).required(),
+    })
+    .allow(null),
 });
 
 const validateRegisterSchema = (userInput) =>

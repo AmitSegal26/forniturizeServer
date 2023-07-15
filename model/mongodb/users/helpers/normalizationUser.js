@@ -24,7 +24,7 @@ const normalizeUser = (userData) => {
             data: "../../../../assets/imgs/errorImg.png",
             contentType: "image/png",
           }),
-    alt: userData.image.alt || "profile picture",
+    alt: userData.image.alt || "Profile picture",
   };
   return {
     ...userData,
