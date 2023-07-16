@@ -86,7 +86,7 @@ router.post("/register", async (req, res) => {
   try {
     await authValidationService.registerUserValidation(req.body);
     req.body.password = await hashService.generateHash(req.body.password);
-    req.body = normalizeUser(req.body);
+    req.body = await normalizeUser(req.body);
     let user = await usersServiceModel.registerUser(req.body);
     if (!user.password) {
       throw new CustomError("something went wrong, check the database");
