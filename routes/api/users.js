@@ -51,13 +51,30 @@ router.get(
 //get information about the user using the token
 router.get("/userInfo", authmw, async (req, res) => {
   try {
-    if (req.userData) {
-      res
-        .status(200)
-        .json(await usersServiceModel.getUserById(req.userData._id));
-    } else {
+    if (!req.userData) {
       throw new CustomError("something went wrong, try again later");
     }
+    let userFromDB = await usersServiceModel.getUserById(req.userData._id);
+    if (!userFromDB) {
+      throw new CustomError("something went wrong, try again later");
+    }
+    let newUserFromDB = JSON.parse(JSON.stringify(userFromDB));
+    if (
+      newUserFromDB.image &&
+      newUserFromDB.image.imageFile &&
+      newUserFromDB.image.imageFile.data
+    ) {
+      let tempImage = JSON.parse(
+        JSON.stringify(newUserFromDB.image.imageFile.data)
+      );
+      const bufferData = Buffer.from(tempImage.data);
+
+      // Convert the Buffer object to a Base64-encoded string
+      const base64Data = bufferData.toString("base64");
+
+      newUserFromDB.image.dataStr = base64Data + "";
+    }
+    res.status(200).json(newUserFromDB);
   } catch (err) {
     res.status(400).json(err);
   }
