@@ -198,7 +198,7 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
 #### USAGE: Recieve an array containing all the card in the DB
 
 - HTTP Method: [GET]
-- URL End Point Request: [/cards/cards]
+- URL End Point Request: [/cards/allCards]
 - Authentication Needed (token): [No]
 - Authorizations Needed: [none]
 
