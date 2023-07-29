@@ -40,7 +40,6 @@ const normalizeUser = (userData) => {
       ? funciFunc("otherAvatar.jpg")
       : funciFunc("errorImg.png")
     : funciFunc("errorImg.png");
-
   return imageBufferPromise
     .then((imageBuffer) => ({
       ...userData,

@@ -17,7 +17,18 @@ router.get("/allCards", async (req, res) => {
     if (!allCards) {
       return res.json({ msg: "no cards at the data base" });
     }
-    res.json(allCards);
+    let newCardsArr = JSON.parse(JSON.stringify(allCards));
+    for (const card of newCardsArr) {
+      if (card.image && card.image.imageFile && card.image.imageFile.data) {
+        let tempImage = JSON.parse(JSON.stringify(card.image.imageFile.data));
+        const bufferData = Buffer.from(tempImage.data);
+        // Convert the Buffer object to a Base64-encoded string
+        const base64Data = bufferData.toString("base64");
+
+        card.image.dataStr = base64Data + "";
+      }
+    }
+    res.json(newCardsArr);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -31,9 +42,24 @@ router.get("/card/:id", async (req, res) => {
     await IDValidation(req.params.id);
     const cardFromDB = await cardsServiceModel.getCardById(req.params.id);
     if (!cardFromDB) {
-      return res.json({ msg: "no card found" });
+      return res.status(400).json({ msg: "no card found" });
     }
-    res.json(cardFromDB);
+    let newCardFromDB = JSON.parse(JSON.stringify(cardFromDB));
+    if (
+      newCardFromDB.image &&
+      newCardFromDB.image.imageFile &&
+      newCardFromDB.image.imageFile.data
+    ) {
+      let tempImage = JSON.parse(
+        JSON.stringify(newCardFromDB.image.imageFile.data)
+      );
+      const bufferData = Buffer.from(tempImage.data);
+      // Convert the Buffer object to a Base64-encoded string
+      const base64Data = bufferData.toString("base64");
+
+      newCardFromDB.image.dataStr = base64Data + "";
+      res.json(newCardFromDB);
+    }
   } catch (err) {
     res.status(400).json(err);
   }

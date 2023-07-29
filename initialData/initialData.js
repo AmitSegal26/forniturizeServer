@@ -21,7 +21,7 @@ const initialData = async () => {
     let user_id = "";
     for (let user of usersData) {
       user.password = await hashService.generateHash(user.password);
-      user = normalizeUser(user);
+      user = await normalizeUser(user);
       user_id = await usersService.registerUser(user);
     }
     user_id = user_id._id + "";

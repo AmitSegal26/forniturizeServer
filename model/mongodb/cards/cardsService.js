@@ -14,10 +14,10 @@ const getCardById = (id) => {
   return Card.findById(id);
 };
 
-const updateCard = (id, cardToUpdate) => {
+const updateCard = async (id, cardToUpdate) => {
   return Card.findByIdAndUpdate(
     id,
-    normalizeCardService(cardToUpdate, cardToUpdate.user_id + ""),
+    await normalizeCardService(cardToUpdate, cardToUpdate.user_id + ""),
     {
       new: true,
     }

@@ -1,14 +1,34 @@
+const fs = require("fs");
+const path = require("path");
+
 const normalizeCard = (card, userId) => {
+  const funciFunc = (nameOfImage) => {
+    const imagePath = path.join(
+      __dirname,
+      "..",
+      "..",
+      "..",
+      "..",
+      "assets",
+      "imgs",
+      nameOfImage
+    );
+    return new Promise((resolve, reject) => {
+      fs.readFile(imagePath, (error, data) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+
+        const imageBuffer = Buffer.from(data);
+        resolve(imageBuffer);
+      });
+    });
+  };
+  const imageBufferPromise = funciFunc("cardDefImg.png");
   if (!card.image) {
     card.image = {};
   }
-  card.image = {
-    imageFile: card.image.imageFile || {
-      data: "../../../../assets/imgs/cardDefImg.png",
-      contentType: "image/png",
-    },
-    alt: card.image.alt || "default forniture image",
-  };
   card.rating = (card.rating &&
     card.rating.ratingTotalScore &&
     card.rating.ratingUsers && { ...card.rating }) || {
@@ -23,10 +43,26 @@ const normalizeCard = (card, userId) => {
   card.stock[0][0].size.height = card.stock[0][0].size.height || null;
   card.stock[0][0].size.width = card.stock[0][0].size.width || null;
   card.stock[0][0].size["length"] = card.stock[0][0].size["length"] || null;
-  return {
-    ...card,
-    user_id: card.user_id || userId,
-  };
+
+  card.user_id = card.user_id || userId;
+  // return {
+  //   ...card,
+  // };
+  return imageBufferPromise
+    .then((imageBuffer) => ({
+      ...card,
+      image: {
+        imageFile: card.image.imageFile || {
+          data: `data:image/png;base64,${imageBuffer.toString("base64")}`,
+          contentType: "image/png",
+        },
+        alt: card.image.alt || "Profile picture",
+      },
+    }))
+    .catch((error) => {
+      console.error("Error reading the image file:", error);
+      throw error; // Propagate the error to the caller
+    });
 };
 
 module.exports = normalizeCard;

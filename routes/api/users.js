@@ -68,7 +68,6 @@ router.get("/userInfo", authmw, async (req, res) => {
         JSON.stringify(newUserFromDB.image.imageFile.data)
       );
       const bufferData = Buffer.from(tempImage.data);
-
       // Convert the Buffer object to a Base64-encoded string
       const base64Data = bufferData.toString("base64");
 
