@@ -30,7 +30,6 @@ const normalizeUser = (userData) => {
   if (!userData.image) {
     userData.image = {};
   }
-
   const imageBufferPromise = userData
     ? userData.gender == "male"
       ? funciFunc("maleAvatar.jpg")

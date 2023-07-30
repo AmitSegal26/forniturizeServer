@@ -8,9 +8,14 @@ const chalk = require("chalk");
 const fs = require("fs");
 const usersModelService = require("./model/usersService/usersService");
 const apiRouter = require("./routes/api");
+const bodyParser = require("body-parser");
 const app = express();
 //!LOGIN-RADIUS
 const session = require("express-session");
+
+//extending image file upload
+app.use(bodyParser.json({ limit: "1mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "1mb" }));
 
 app.set("view engine", "ejs");
 app.use(

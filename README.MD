@@ -148,9 +148,6 @@ To access certain endpoints, [AUTHORIZATION known as TOKEN - *header key is "x-a
         - last: string, min length 2, required
           }
       - email: string, email regex (example@email.com),UNIQUE - cant proceed if already taken in    the Database, required
-      - password: string, min length 8, must contain: 1 capital letter, 1 small letter, 4 digit     and one
-        of the following chars {#?!@$%^&\*-}, required
-      - gender: "male"/"female"/"other"
       - image:{
         - imageFile:{
             - data:**<INSERT IMAGE FILE (.png,.jpg,.jpeg,.gif)>**

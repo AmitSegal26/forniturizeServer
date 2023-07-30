@@ -8,7 +8,6 @@ const editUserSchema = Joi.object({
       last: Joi.string().min(2).max(256).required(),
     })
     .required(),
-  gender: Joi.string().allow("male").allow("female").allow("other"),
   email: Joi.string()
     .pattern(HELPER.REGEXES.EMAIL)
     .messages({
@@ -17,10 +16,12 @@ const editUserSchema = Joi.object({
     .min(6)
     .max(256)
     .required(),
-  image: Joi.object().keys({
-    imageFile: Joi.any(),
-    alt: Joi.string().min(2).max(256).required(),
-  }),
+  image: Joi.object()
+    .keys({
+      imageFile: Joi.any(),
+      alt: Joi.string().min(2).max(256).required(),
+    })
+    .allow(null),
 });
 
 const validateEditUserSchema = (userInput) =>

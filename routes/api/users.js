@@ -152,12 +152,14 @@ router.put(
   permissionsMiddleware(false, true),
   async (req, res) => {
     try {
+      let { id } = req.params;
       let newData = req.body;
       await authValidationService.editUserValidation(newData);
-      let newUpdatedUser = await usersServiceModel.updateUserById(
-        req.params.id,
-        newData
-      );
+      if (newData && !newData.gender) {
+        const userFullDataFromDB = await usersServiceModel.getUserById(id);
+        newData.gender = userFullDataFromDB.gender;
+      }
+      let newUpdatedUser = await usersServiceModel.updateUserById(id, newData);
       res.status(200).json(newUpdatedUser);
     } catch (err) {
       res.status(400).json(handleEmailExistsErrorFromMongoose(err));
