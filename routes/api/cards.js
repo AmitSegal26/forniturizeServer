@@ -79,11 +79,16 @@ router.get("/getCart", authmw, async (req, res) => {
       return;
     }
     for (const card of cardsArr) {
-      let { cart } = card;
-      for (const user of cart) {
-        if (user == _id) {
-          userCardsArr.push(card);
-          break;
+      let { stock } = card;
+      for (let i = 0; i < stock.length; i++) {
+        for (let j = 0; j < stock[i].length; j++) {
+          let { cart } = stock[i][j];
+          for (const user of cart) {
+            if (user == _id) {
+              userCardsArr.push(card);
+              break;
+            }
+          }
         }
       }
     }
@@ -177,20 +182,42 @@ router.patch("/rate/:id", authmw, async (req, res) => {
 //add/remove card to/from cart
 router.patch("/cart/:id", authmw, async (req, res) => {
   try {
+    let addedToCart = false;
     let cardId = req.params.id;
     await IDValidation(cardId);
+    if (
+      req.body &&
+      (!req.body.hasOwnProperty("rowIndex") ||
+        !req.body.hasOwnProperty("columnIndex"))
+    ) {
+      throw new CustomError("please enter indexes of the array");
+    }
     let currCard = await cardsServiceModel.getCardById(cardId);
     if (!currCard) {
-      return res.json({ msg: "no card found to add" });
+      throw new CustomError("no card found to add");
     }
-    if (currCard.cart.find((userId) => userId == req.userData._id)) {
-      currCard.cart = currCard.cart.filter(
-        (userId) => userId != req.userData._id
-      );
+    let { rowIndex, columnIndex } = req.body;
+    let newCurrCard = JSON.parse(JSON.stringify(currCard));
+    if (
+      newCurrCard.stock[rowIndex][columnIndex].cart.find(
+        (userId) => userId == req.userData._id
+      )
+    ) {
+      newCurrCard.stock[rowIndex][columnIndex].cart = newCurrCard.stock[
+        rowIndex
+      ][columnIndex].cart.filter((userId) => userId != req.userData._id);
     } else {
-      currCard.cart = [...currCard.cart, req.userData._id];
+      addedToCart = true;
+      newCurrCard.stock[rowIndex][columnIndex].cart = [
+        ...newCurrCard.stock[rowIndex][columnIndex].cart,
+        req.userData._id,
+      ];
     }
-    res.status(200).json(await cardsServiceModel.updateCard(cardId, currCard));
+    currCard = { ...newCurrCard };
+    res.status(200).json({
+      data: await cardsServiceModel.updateCard(cardId, currCard),
+      addedToCart,
+    });
   } catch (err) {
     res.status(400).json(err);
   }

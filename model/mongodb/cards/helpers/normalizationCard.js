@@ -45,9 +45,7 @@ const normalizeCard = (card, userId) => {
   card.stock[0][0].size["length"] = card.stock[0][0].size["length"] || null;
 
   card.user_id = card.user_id || userId;
-  // return {
-  //   ...card,
-  // };
+
   return imageBufferPromise
     .then((imageBuffer) => ({
       ...card,
